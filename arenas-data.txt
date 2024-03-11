@@ -1,0 +1,6 @@
+FID        ADDRESS                 X                    Y                       ARENA
+0          2555 Pulford St         -83.035508601        42.2579203855           Capri Pizzeria Recreation Complex
+1          1551 Wyandotte St W     -83.0531282837       42.3068279246           Adie Knox Arena
+2          3205 Forest Glade Dr    -82.9150971889       42.3042142342           Forest Glade Arena
+3          8787 McHugh St          -82.9276320926       42.3187335808           WFCU Centre
+
