@@ -6,6 +6,7 @@
  * @since Mar-10-24
  */
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Field {
@@ -125,16 +126,20 @@ public class Field {
      * of objects/values associated with each field.
      * @return A Map<String, Integer> representing the number of values associated with each field.
      */
-    public Map<String, Integer> getValuesCountPerField() {
-        Map<String, Integer> numValues = new HashMap<>();
-        for (Map.Entry<String, List<Object>> entry : fields.entrySet()) {
-            String fieldName = entry.getKey();
-            List<Object> values = entry.getValue();
-            numValues.put(fieldName, values.size());
-        }
-        return numValues;
+    public int getValuesCountPerField() {
+        return getValues("FID").size();
     }
 
-
+    /**
+     * Retrieves the list of columns
+     * @return An ArrayList<String> representing the list of columns or fields
+     */
+    public ArrayList<String> getColumns(){
+        ArrayList<String> columns = new ArrayList<>();
+        for(Map.Entry<String, List<Object>> entry : fields.entrySet()){
+            columns.add(entry.getKey());
+        }
+        return columns;
+    }
 
 }
