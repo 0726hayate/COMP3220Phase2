@@ -31,13 +31,22 @@ public class FileManager {
         return toRename;
     }
     
-
-    public int sizeOf(File file) {
-        return (int) file.getFileSize();
+    public static void printcontent(Field content,File file){
+        int columns = file.numberOfColumns();
+        int rows = file.numberOfRows();
+        for(int i=0; i<columns; i++){
+            System.out.format("%-25s",content.getColumns().get(i));
+        }
+        System.out.println();
+        for(int i=0; i<rows; i++){
+            System.out.format("%-24s %-24s %-24s %-24s %-24s\n", content.getValues("FID").get(i), content.getValues("ADDRESS").get(i),
+                    content.getValues("X").get(i), content.getValues("Y").get(i), content.getValues("ARENA").get(i));
+        }
     }
 
 
- public static void main(String[] args) {
+
+    public static void main(String[] args) {
         Field content = new Field();
 
         // adding the FID field with values
@@ -66,11 +75,10 @@ public class FileManager {
         content.addField("Y", list);
 
         File file = new File("Arenas", content);
-       
-        System.out.println(file.getContent());
- 
-        
-    
+
+        printcontent(content,file);
+
+
     }
 
     
