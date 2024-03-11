@@ -4,14 +4,14 @@ import java.util.*;
  * File class represents an individual file that contains information regarding a given dataset
  *
  * @author Farzana Moury
- * @version 1.3
+ * @version 1.0
  * @since Mar-11-24
  */
 public class File {
     private String fileName;
     private int fileSize = 0;
     private Field content;
-    private String filePath;
+    private String filePath = "./arenas-data.txt";
 
     /**
      * default constructor
@@ -78,6 +78,21 @@ public class File {
      */
     public void setContent(Field content) { this.content = content; }
 
+    /**
+     * getter for file path
+     * @return filePath
+     */
+    public String getFilePath() {
+        return filePath;
+    }
+
+    /**
+     * setter for file path
+     * @param filePath the path of the file
+     */
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     /**
      * get number of columns of the content
@@ -85,6 +100,10 @@ public class File {
      */
     public int numberOfColumns(){
         return content.getFieldSize();
+    }
+
+    public int numberOfRows(){
+        return content.getValuesCountPerField();
     }
 
 
@@ -118,9 +137,23 @@ public class File {
 
         File file = new File("Arenas", content);
         System.out.println(file.getContent().getFieldNames());
-        System.out.println(file.getContent().getValues("FID"));
 
         //get the number of columns and rows
         System.out.println(file.numberOfColumns());
+        System.out.println(file.numberOfRows());
+
+        // printing the contents of the file
+        for(int i=0; i<file.numberOfColumns(); i++){
+            System.out.format("%-25s",content.getColumns().get(i));
+        }
+
+        System.out.println();
+
+        for(int i=0; i<file.numberOfRows(); i++){
+            System.out.format("%-24s %-24s %-24s %-24s %-24s\n", content.getValues("FID").get(i), content.getValues("ADDRESS").get(i),
+                    content.getValues("X").get(i), content.getValues("Y").get(i), content.getValues("ARENA").get(i));
+        }
+
     }
+
 }
