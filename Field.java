@@ -24,7 +24,7 @@ public class Field {
      * @param fieldName The name of the field to be added. This acts as a key in the map.
      * @param values The list of objects/values to be associated with the field. This list is stored against the field name in the map.
      */
-   
+
     public void addField(String fieldName, List<Object> values) {
         fields.put(fieldName, new ArrayList<>(values));
     }
@@ -34,7 +34,7 @@ public class Field {
      * If the field does not exist, the method does nothing, preventing any errors or exceptions.
      * @param fieldName The name of the field to be removed from the map.
      */
- 
+
     public void removeField(String fieldName) {
         fields.remove(fieldName);
     }
@@ -92,9 +92,9 @@ public class Field {
 
     public List<Object> getValues(String fieldName) {
         // getORDefault: Returns the value to which the specified key is mapped,
-            // or defaultValue if the map contains no mapping for the key.
+        // or defaultValue if the map contains no mapping for the key.
         //Collections.emptyList() Returns the empty list (immutable).
-            // This list is serializable, type-safe, and consumes less memory than an empty instance of ArrayList
+        // This list is serializable, type-safe, and consumes less memory than an empty instance of ArrayList
         return fields.getOrDefault(fieldName, Collections.emptyList());
     }
 
@@ -103,12 +103,38 @@ public class Field {
      * The returned set is a view of the keys in the map, meaning any changes to the map will be reflected in the set.
      * @return A Set<String> containing all field names (keys) present in the map.
      */
-    
+
     public Set<String> getFieldNames() {
         // Returns a Set view of the keys contained in the map.
         // The set is backed by the map, changes to the map are reflected in the set.
         return fields.keySet();
     }
+
+    /**
+     * Returns the number of fields stored in the map.
+     * This method provides a direct means to ascertain the quantity of field entries currently maintained.
+     * @return An integer representing the total number of fields (key-value pairs) present in the map.
+     */
+    public int getFieldSize() {
+        return fields.size();
+    }
+
+    /**
+     * Retrieves the number of values associated with each field in the map.
+     * This method returns a map where the keys are the field names and the values are the counts
+     * of objects/values associated with each field.
+     * @return A Map<String, Integer> representing the number of values associated with each field.
+     */
+    public Map<String, Integer> getValuesCountPerField() {
+        Map<String, Integer> numValues = new HashMap<>();
+        for (Map.Entry<String, List<Object>> entry : fields.entrySet()) {
+            String fieldName = entry.getKey();
+            List<Object> values = entry.getValue();
+            numValues.put(fieldName, values.size());
+        }
+        return numValues;
+    }
+
 
 
 }
