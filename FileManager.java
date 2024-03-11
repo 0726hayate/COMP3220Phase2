@@ -12,8 +12,6 @@ public class FileManager {
     }
     
 
-    
-    //why?
     public File newFile() {
         File file = new File();
         files.add(file);
@@ -21,19 +19,19 @@ public class FileManager {
         return file;
     }
     
-    //why?
+
     public void deleteFile(File delete) {
         files.remove(delete);
         numFiles--;
     }
     
-    //why?
+
     public File renameFile(File toRename, String newName) {
         toRename.setFileName(newName);
         return toRename;
     }
     
-    //why?
+
     public int sizeOf(File file) {
         return (int) file.getFileSize();
     }
