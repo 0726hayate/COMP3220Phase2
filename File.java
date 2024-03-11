@@ -4,7 +4,7 @@ import java.util.*;
  * File class represents an individual file that contains information regarding a given dataset
  *
  * @author Farzana Moury
- * @version 1.2
+ * @version 1.3
  * @since Mar-11-24
  */
 public class File {
@@ -79,6 +79,15 @@ public class File {
     public void setContent(Field content) { this.content = content; }
 
 
+    /**
+     * get number of columns of the content
+     * @return the number of columns
+     */
+    public int numberOfColumns(){
+        return content.getFieldSize();
+    }
+
+
     public static void main(String[] args) {
         Field content = new Field();
 
@@ -110,5 +119,8 @@ public class File {
         File file = new File("Arenas", content);
         System.out.println(file.getContent().getFieldNames());
         System.out.println(file.getContent().getValues("FID"));
+
+        //get the number of columns and rows
+        System.out.println(file.numberOfColumns());
     }
 }
