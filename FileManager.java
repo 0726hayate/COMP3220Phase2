@@ -10,7 +10,10 @@ public class FileManager {
         this.path = pathname;
         return this.path;
     }
-    
+
+    public string getfilePath(){
+        return path;
+    }
 
     public File newFile() {
         File file = new File();
