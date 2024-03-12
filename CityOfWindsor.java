@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class CityOfWindsor {
-    public static void main(String[] args) {
+public class Menu {
+    public Menu() {
         JFrame frame = new JFrame("City of Windsor Open Data");
         frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,13 +79,14 @@ public class CityOfWindsor {
         menu.setFont(menuFont);
         menuBar.setFont(menuFont);
 
-        frame.setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar); // Add menu bar to the frame
+
         frame.setVisible(true);
     }
 
     // Dummy method to get available files
-    private static ArrayList<String> getAvailableFiles() {
-        // to be changed to list of file class
+    private ArrayList<String> getAvailableFiles() {
+        FileManager dataFiles = new FileManager();
         ArrayList<String> files = new ArrayList<>();
         files.add("File1");
         files.add("File2");
@@ -93,7 +94,7 @@ public class CityOfWindsor {
     }
 
     // Dummy method to handle file download
-    private static void downloadFile(String fileName, String format) {
+    private void downloadFile(String fileName, String format) {
         // Implementation to download the file in the specified format
         JOptionPane.showMessageDialog(null, "Downloading " + fileName + format + " format.");
     }
