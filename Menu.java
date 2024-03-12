@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Menu {
-    public Menu() {
+    FileManager database;
+    public Menu(FileManager database) {
+
+        this.database = database;
+
         JFrame frame = new JFrame("City of Windsor Open Data");
         frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,12 +88,13 @@ public class Menu {
         frame.setVisible(true);
     }
 
-    // Dummy method to get available files
+    // method to get available files names
     private ArrayList<String> getAvailableFiles() {
-        FileManager dataFiles = new FileManager();
         ArrayList<String> files = new ArrayList<>();
-        files.add("File1");
-        files.add("File2");
+        for (int i = 0; i < database.getNumFiles(); i++) {
+            ArrayList<File> allFiles = database.getFiles();
+            files.add(allFiles.get(i).getFileName());
+        }
         return files;
     }
 
