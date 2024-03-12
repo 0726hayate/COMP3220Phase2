@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 
 
 public class FileManager {
@@ -19,8 +19,16 @@ public class FileManager {
         return numFiles;
     }
 
-    public ArrayList<File> getFiles() {
-        return files;
+    public File getFile() {
+        int index = path.lastIndexOf("./")+2;
+        String fname = path.substring(index);
+
+        for(File f : files){
+            if(f.getFileName().contentEquals(fname)){
+                return f;
+            }
+        }
+        return null;
     }
 
     public File newFile(String fileName, Field content) {
@@ -48,5 +56,3 @@ public class FileManager {
 
     
 }
-
-
