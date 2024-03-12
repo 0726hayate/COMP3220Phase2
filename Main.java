@@ -34,6 +34,10 @@ public class Main {
 
         FileManager database = new FileManager();
         database.newFile("Arenas", content);
+        database.changePath("./Arenas.txt");
+        DownloadManager d = new DownloadManager();
+        d.selectToDownload("./Arenas.txt");
+        d.downloadAs("doc", database);
 
         Menu menu = new Menu(database);
     }
