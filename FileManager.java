@@ -11,12 +11,20 @@ public class FileManager {
         return this.path;
     }
 
-    public string getfilePath(){
+    public String getfilePath(){
         return path;
     }
 
-    public File newFile() {
-        File file = new File();
+    public int getNumFiles() {
+        return numFiles;
+    }
+
+    public ArrayList<File> getFiles() {
+        return files;
+    }
+
+    public File newFile(String fileName, Field content) {
+        File file = new File(fileName, content);
         files.add(file);
         numFiles++;
         return file;
