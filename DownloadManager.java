@@ -4,7 +4,7 @@ import java.io.IOException;
 /**
  * Download manager that is responsible for downloading the requested file in the specified available file formats
  * @author Samarveer Manku
- * @version 1.0
+ * @version 1.1
  * @since March 11 2024
  */
 
@@ -21,11 +21,12 @@ public class DownloadManager{
     /**
      * Get the file format from user and download it as that file
      * @param fileType File extension the user requested
+     * @param files File manager with all available files used that will be used to get file content to download
      * @throws IOException FileWriter needs to throw an I/O exception if it fails write into the specified file
      */
-    public void downloadAs(String fileType, FileManager f) throws IOException{
-        String name = f.getFile().getFileName();
-        File file = f.getFile();
+    public void downloadAs(String fileType, FileManager files) throws IOException{
+        String name = files.getFile().getFileName();
+        File file = files.getFile();
         Field content = file.getContent();
         int index = name.lastIndexOf(".");
         name = name.substring(0, index+1);
