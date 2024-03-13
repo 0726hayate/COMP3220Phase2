@@ -102,6 +102,10 @@ public class File {
         return content.getFieldSize();
     }
 
+    /**
+     * get number of rows of the content
+     * @return the number of rows
+     */
     public int numberOfRows(){
         return content.getValuesCountPerField();
     }
