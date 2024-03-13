@@ -105,9 +105,9 @@ public class Menu {
         return files;
     }
 
-    // Dummy method to handle file download
+    // method to handle file download
     private void downloadFile(String fileName, String format) throws IOException {
-        downloader.downloadAs(format, database, 0);
+        downloader.downloadAs(format, database);
         JOptionPane.showMessageDialog(null, "Downloading " + fileName + format + " format.");
     }
 }
