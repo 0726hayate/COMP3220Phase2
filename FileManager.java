@@ -1,5 +1,11 @@
+/**
+ * FileManager class represents an container that contains all File as a Objects 
+ *
+ * @author Wei wei
+ * @version 1.2
+ * @since Mar-11-24
+ */
 import java.util.ArrayList;
-
 
 public class FileManager {
     private ArrayList<File> files = new ArrayList<File>();
