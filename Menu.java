@@ -5,43 +5,59 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * menu class that will show a visual menu for the user to make selections
+ *
+ * @author Liam MacKenzie and Vu
+ * @version 1.1
+ * @since March 8th 2024
+ */
 public class Menu {
-    FileManager database;
-    DownloadManager downloader;
+    FileManager database; // will be the fileManager for the system
+    DownloadManager downloader; // will be the download manager for our system
+
+    /**
+     * on instance of a menu we will set up the JFrame and menu
+     * @param database link the filemanager to the instance of our menu
+     * @param downloader link the downloadmanager to the instance of our menu
+     */
     public Menu(FileManager database, DownloadManager downloader) {
 
         this.database = database;
         this.downloader = downloader;
 
+        // title the jframe and size it
         JFrame frame = new JFrame("City of Windsor Open Data");
         frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Set background image
+        // set background image
         ImageIcon backgroundImage = new ImageIcon("src/img.png");
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
         frame.getLayeredPane().add(backgroundLabel, Integer.valueOf(Integer.MIN_VALUE));
         JPanel contentPane = (JPanel) frame.getContentPane();
-        contentPane.setLayout(new BorderLayout()); // Set layout manager to BorderLayout
-        contentPane.add(backgroundLabel, BorderLayout.CENTER); // Add the background label to the center of the content pane
-        contentPane.setOpaque(false); // Make content pane non-opaque
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(backgroundLabel, BorderLayout.CENTER);
+        contentPane.setOpaque(false);
 
+        // set up the selections in the menu
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Download");
         JMenuItem menuItem1 = new JMenuItem("Select File");
         JMenuItem menuItem2 = new JMenuItem("Exit");
 
-        // Set font and size for menu items
-        Font menuFont = new Font("Arial", Font.PLAIN, 20); // Adjust the font and size as needed
+        // set font and size for menu items
+        Font menuFont = new Font("Arial", Font.PLAIN, 24);
         menuItem1.setFont(menuFont);
         menuItem2.setFont(menuFont);
 
+        // the download option in menu
         menuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Display a list of available files
-                ArrayList<String> availableFiles = getAvailableFiles(); // Get available files
+                // show a list of available files
+                ArrayList<String> availableFiles = getAvailableFiles(); // get available files
                 String selectedFile = (String) JOptionPane.showInputDialog(
                         frame,
                         "Select a file to download:",
@@ -51,29 +67,32 @@ public class Menu {
                         availableFiles.toArray(),
                         null);
 
+                // once the user has selected on of the options
                 if (selectedFile != null) {
-                    // If a file is selected, prompt for the download format
                     String format = JOptionPane.showInputDialog(frame, "Enter the file format (.txt, .doc, .csv):");
+                    //get the format the user wishes to download
                     if (format != null) {
                         ArrayList<String> allowedFormats = new ArrayList<>();
                         allowedFormats.add(".txt");
                         allowedFormats.add(".doc");
                         allowedFormats.add(".csv");
-
+                        //check if its one of the following avalible options and if it is then attempt to download
                         if (allowedFormats.contains(format)) {
                             try {
                                 downloadFile(selectedFile, format);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
-                        } else {
+                        }
+                        // if its not one of the specified formats
+                        else {
                             JOptionPane.showMessageDialog(frame, "Invalid format. Please enter one of the following: .txt, .doc, .csv");
                         }
                     }
                 }
             }
         });
-
+        // the exit option in the menu
         menuItem2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +114,10 @@ public class Menu {
         frame.setVisible(true);
     }
 
-    // method to get available files names
+    /**
+     * will give our menu a list of the avalable files
+     * @return a list of the avalible files in our system that the user can pick from
+     */
     private ArrayList<String> getAvailableFiles() {
         ArrayList<String> files = new ArrayList<>();
         for (int i = 0; i < database.getNumFiles(); i++) {
@@ -105,7 +127,12 @@ public class Menu {
         return files;
     }
 
-    // method to handle file download
+    /**
+     * will download your file in another file of which you specify
+     * @param fileName the name of the file that you wish to download
+     * @param format the type extension of the format in which you want to download
+     * @throws IOException to catch the exseption thrown by downloader
+     */
     private void downloadFile(String fileName, String format) throws IOException {
         downloader.downloadAs(format, database);
         JOptionPane.showMessageDialog(null, "Downloading " + fileName + format + " format.");
