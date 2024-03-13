@@ -52,8 +52,12 @@ public class Menu {
         menuItem1.setFont(menuFont);
         menuItem2.setFont(menuFont);
 
-        // the download option in menu
+
         menuItem1.addActionListener(new ActionListener() {
+            /**
+             * when the user clickes on the download button it will get a list of avalable files and check the format of what they wish to download
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 // show a list of available files
@@ -94,6 +98,10 @@ public class Menu {
         });
         // the exit option in the menu
         menuItem2.addActionListener(new ActionListener() {
+            /**
+             * when the user clickes on this button it will exit and close the program
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
