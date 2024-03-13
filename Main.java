@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Field content = new Field();
 
@@ -35,10 +36,10 @@ public class Main {
         FileManager database = new FileManager();
         database.newFile("Arenas", content);
         database.changePath("./Arenas.txt");
+
         DownloadManager d = new DownloadManager();
         d.selectToDownload("./Arenas.txt");
-        d.downloadAs("doc", database);
 
-        Menu menu = new Menu(database);
+        Menu menu = new Menu(database, d);
     }
 }
