@@ -19,6 +19,9 @@ public class FileManager {
         return numFiles;
     }
 
+    public ArrayList<File> getFiles() {
+        return files;
+    }
     public File getFile() {
         int index = path.lastIndexOf("./")+2;
         String fname = path.substring(index);
