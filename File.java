@@ -16,6 +16,7 @@ public class File {
      */
     public File(){
         this.fileName = "sample-file.txt";
+        this.filePath = "./"+fileName;
         this.content = null;
     }
 
@@ -26,6 +27,7 @@ public class File {
      */
     public File(String fileName, Field content){
         this.fileName = fileName;
+        this.filePath = "./"+fileName;
         this.content = content;
         this.fileSize = content.getFieldNames().size();
     }
