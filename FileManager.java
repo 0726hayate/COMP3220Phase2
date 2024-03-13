@@ -23,8 +23,9 @@ public class FileManager {
         return files;
     }
     public File getFile() {
-        int index = path.lastIndexOf("./")+2;
-        String fname = path.substring(index);
+        int index1 = path.lastIndexOf("./")+2;
+        int index2 = path.lastIndexOf(".");
+        String fname = path.substring(index1, index2);
 
         for(File f : files){
             if(f.getFileName().contentEquals(fname)){
