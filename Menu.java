@@ -2,13 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Menu {
     FileManager database;
-    public Menu(FileManager database) {
+    DownloadManager downloader;
+    public Menu(FileManager database, DownloadManager downloader) {
 
         this.database = database;
+        this.downloader = downloader;
 
         JFrame frame = new JFrame("City of Windsor Open Data");
         frame.setSize(1000, 600);
@@ -58,7 +61,11 @@ public class Menu {
                         allowedFormats.add(".csv");
 
                         if (allowedFormats.contains(format)) {
-                            downloadFile(selectedFile, format);
+                            try {
+                                downloadFile(selectedFile, format);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         } else {
                             JOptionPane.showMessageDialog(frame, "Invalid format. Please enter one of the following: .txt, .doc, .csv");
                         }
@@ -99,8 +106,8 @@ public class Menu {
     }
 
     // Dummy method to handle file download
-    private void downloadFile(String fileName, String format) {
-        // Implementation to download the file in the specified format
+    private void downloadFile(String fileName, String format) throws IOException {
+        downloader.downloadAs(format, database, 0);
         JOptionPane.showMessageDialog(null, "Downloading " + fileName + format + " format.");
     }
 }
