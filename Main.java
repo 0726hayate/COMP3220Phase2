@@ -33,13 +33,6 @@ public class Main {
         list = new ArrayList<>(y_values);
         content.addField("Y", list);
 
-        FileManager database = new FileManager();
-        database.newFile("Arenas", content);
-        database.changePath("./Arenas.txt");
-
-        DownloadManager d = new DownloadManager();
-        d.selectToDownload("./Arenas.txt");
-
-        Menu menu = new Menu(database, d);
+        Menu menu = new Menu("Arenas", "./Arenas.txt", content);
     }
 }
