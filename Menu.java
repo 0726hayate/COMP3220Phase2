@@ -18,13 +18,18 @@ public class Menu {
 
     /**
      * on instance of a menu we will set up the JFrame and menu
-     * @param database link the filemanager to the instance of our menu
-     * @param downloader link the downloadmanager to the instance of our menu
+     * @param file
+     * @param path
+     * @param content
      */
-    public Menu(FileManager database, DownloadManager downloader) {
+    public Menu(String file, String path, Field content) {
 
-        this.database = database;
-        this.downloader = downloader;
+        database = new FileManager();
+        database.newFile(file, content);
+        database.changePath(path);
+
+        downloader = new DownloadManager();
+        downloader.selectToDownload(path);
 
         // title the jframe and size it
         JFrame frame = new JFrame("City of Windsor Open Data");
